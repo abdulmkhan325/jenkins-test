@@ -7,17 +7,14 @@ def clusterName = "rosa-${dateStamp}"
 echo "Cluster Name: ${clusterName}"
 
 pipeline {  
-    agent any
-  
-    environment {
-        ROSA_TOKEN =  credentials('aws-token-rosa') 
-    }
+    agent any 
 
     stages { 
         // Checkout code from Git repository
         stage('AWS Check') {
             steps {
                 sh """
+                    pwd
                     aws --version
                 """.stripIndent()
             }
@@ -26,7 +23,7 @@ pipeline {
         stage('Ansible Install and Check') {
             steps {
                 sh """
-                    git --version
+                    git --version 
                 """.stripIndent()  
             }
         }
