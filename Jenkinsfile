@@ -18,19 +18,18 @@ pipeline {
             steps {
                 // Step 1: Modify sudoers file
                 sh """
-                    sudo echo 'nokia'
+                    sudo ls
                 """
             }
         } 
-        stage('AWS Check') { 
+        stage('Yum Upgrade') { 
             steps {
                 sh """ 
-                    pwd  
+                    pwd   
                     whoami
-                    aws --version  
+                    sudo yum upgrade
                 """.stripIndent()  
             }
         } 
-         
     }
 }
