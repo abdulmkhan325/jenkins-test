@@ -13,7 +13,7 @@ pipeline {
         // Checkout code from Git repository
         stage('AWS Check') {
             steps {
-                sh """
+                sh """ 
                     pwd
                     aws --version
                 """.stripIndent()
@@ -23,6 +23,7 @@ pipeline {
         stage('Ansible Install and Check') {
             steps {
                 sh """ 
+                    pwd
                     ansible --version 
                 """.stripIndent()  
             }
