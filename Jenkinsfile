@@ -27,7 +27,7 @@ pipeline {
                 sh """ 
                     pwd   
                     whoami
-                    sudo yum upgrade
+                    sudo yum upgrade -y
                 """.stripIndent()  
             }
         } 
