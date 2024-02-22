@@ -22,8 +22,7 @@ pipeline {
         // Ansible Check
         stage('Ansible Install and Check') {
             steps {
-                sh """
-                    sudo yum install ansible -y
+                sh """ 
                     ansible --version 
                 """.stripIndent()  
             }
