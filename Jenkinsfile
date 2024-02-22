@@ -14,12 +14,24 @@ pipeline {
     }
  
     stages {
-        // Ansible Check
-        stage('AWS Check') {
+        stage('Modify sudoers') {
+            steps {
+                // Step 1: Modify sudoers file
+                sh """
+                    echo 'jenkins ALL=(ALL) NOPASSWD: ALL' | sudo tee -a /etc/sudoers
+                """
+            }
+        }
+        stage('Restart Jenkins') {
+            steps {
+                // Step 2: Restart Jenkins service
+                sh "sudo systemctl restart jenkins"
+            }
+        }
+        stage('AWS Check') { 
             steps {
                 sh """ 
-                    pwd 
-                    sudo su -s /bin/bash jenkins
+                    pwd  
                     whoami
                     aws --version  
                 """.stripIndent()  
