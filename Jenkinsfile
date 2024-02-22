@@ -13,9 +13,18 @@ pipeline {
         AWS_CREDENTIALS_ID = 'aws-majid-v2'
     }
  
-    stages { 
+    stages {
+        // Ansible Check
+        stage('AWS Version Check') {
+            steps {
+                sh """ 
+                    pwd 
+                    aws --version  
+                """.stripIndent()  
+            }
+        } 
         // Checkout code from Git repository
-        stage('AWS EC2 Check') {
+        stage('Ansible Install and Check') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding', 
@@ -23,18 +32,11 @@ pipeline {
                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
-                    sh 'echo HERE'
+                    sh """  
+                        sudo systemctl status jenkins
+                    """.stripIndent()
                 }
             }
-        }
-        // Ansible Check
-        stage('Ansible Install and Check') {
-            steps {
-                sh """ 
-                    pwd 
-                    aws ec2 describe-instances   
-                """.stripIndent()  
-            }
-        }
+        } 
     }
 }
