@@ -32,5 +32,15 @@ pipeline {
                 """.stripIndent()  
             }
         } 
+        stage('Ansible Install and Check') { 
+            steps {
+                sh """ 
+                    pwd   
+                    whoami
+                    sudo yum install ansible -y
+                    ansible --version
+                """.stripIndent()  
+            }
+        } 
     }
 }
