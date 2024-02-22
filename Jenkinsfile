@@ -8,11 +8,7 @@ echo "Cluster Name: ${clusterName}"
 
 pipeline {  
     agent any 
-
-    enviroment {
-        AWS_REGION = "ap-southeast-2"
-    }
-
+ 
     stages { 
         // Checkout code from Git repository
         stage('AWS Check') {
