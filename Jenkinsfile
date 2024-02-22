@@ -14,20 +14,14 @@ pipeline {
     }
  
     stages {
-        stage('Modify sudoers') {
+        stage('Check sudo privileage') {
             steps {
                 // Step 1: Modify sudoers file
                 sh """
-                    echo 'jenkins ALL=(ALL) NOPASSWD: ALL' | sudo tee -a /etc/sudoers
+                    sudo echo 'nokia'
                 """
             }
-        }
-        stage('Restart Jenkins') {
-            steps {
-                // Step 2: Restart Jenkins service
-                sh "sudo systemctl restart jenkins"
-            }
-        }
+        } 
         stage('AWS Check') { 
             steps {
                 sh """ 
