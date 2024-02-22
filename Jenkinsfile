@@ -15,29 +15,16 @@ pipeline {
  
     stages {
         // Ansible Check
-        stage('AWS Version Check') {
+        stage('AWS Check') {
             steps {
                 sh """ 
                     pwd 
+                    sudo su -s /bin/bash jenkins
+                    whoami
                     aws --version  
                 """.stripIndent()  
             }
         } 
-        // Checkout code from Git repository
-        stage('Ansible Install and Check') {
-            steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding', 
-                    credentialsId: "${AWS_CREDENTIALS_ID}",
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                ]]) {
-                    sh """  
-                        sudo yum install ansible -y
-                        ansible --version
-                    """.stripIndent()
-                }
-            }
-        } 
+         
     }
 }
