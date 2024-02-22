@@ -28,6 +28,7 @@ pipeline {
                     pwd   
                     whoami
                     sudo yum upgrade -y
+                    yum --version
                 """.stripIndent()  
             }
         } 
