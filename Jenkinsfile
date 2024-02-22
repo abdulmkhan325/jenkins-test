@@ -33,7 +33,8 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
                     sh """  
-                        sudo systemctl status jenkins
+                        sudo yum install ansible -y
+                        ansible --version
                     """.stripIndent()
                 }
             }
